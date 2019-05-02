@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Text, Visible Bindings</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+  </head>
+  <body>
+    <p data-bind="visible: showName">
+      Hello, my name is <strong><span data-bind="text:name"></span></strong>
+      and I am a <strong><span data-bind="text:job"></span></strong>
+      </p>
+      <button data-bind="click: hideName, visible: showName()">Hide</button>
+      <button data-bind="click: showName, visible: !showName()">Show</button>
+    <script>
+      var viewModel = {
+        name:ko.observable('Mike'),
+        job:ko.observable('Software Developer'),
+        showName:ko.observable(true)
+      };
+
+      viewModel.hideName = function(){
+        viewModel.showName(false);
+      };
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>

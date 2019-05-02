@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Foreach, If, IfNot Bindings</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+  </head>
+  <body>
+    <h1>Employees</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: employees">
+        <tr data-bind="if: id"><!--ifnot: id-->
+          <td data-bind="text: id">
+          </td>
+          <td data-bind="text: name">
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <script>
+      var employees = ko.observableArray([
+        {id:1, name:'Onur'},
+        {id:2, name:'Ali'},
+        {id:null, name:'Alihan'}
+      ]);
+
+      ko.applyBindings();
+    </script>
+  </body>
+</html>

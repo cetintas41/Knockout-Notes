@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Submit, Enable, Disable Bindings</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+  </head>
+  <body>
+    <input type="checkbox" data-bind="checked:isCompany" /> Register
+    <span data-bind="text:submitMessage"></span>
+    Your name: <input type="text" data-bind="value:name, disable:isCompany" />
+    Company name: <input type="text" data-bind="value:companyName, enable:isCompany" />
+    <form data-bind="submit:fireSubmit">
+      <button type="submit">Submit</button>
+      </form>
+    <script>
+      var viewModel = {
+        isCompany:ko.observable(false),
+        name:ko.observable(),
+        companyName:ko.observable(),
+        submitMessage:ko.observable(),
+        fireSubmit: function(){
+          this.submitMessage('Form submitted.');
+        }
+      };
+
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML, CSS Bindings</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+    <style>
+      .highAmount{color:red;}
+    </style>
+  </head>
+  <body>
+    <div data-bind="html: htmlString, css:{highAmount: amount() > 10}"></div>
+    <script>
+      var viewModel = {
+        htmlString:ko.observable(),
+        amount:ko.observable(9)
+
+      };
+
+      viewModel.htmlString('<h1>This is an html heading</h1><p>This is a paragraph</p>');
+
+      ko.applyBindings(viewModel);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ViewModels and Observables</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+  </head>
+  <body>
+    <h1>Welcome <span data-bind="text:firstName"></span> <span data-bind="text:lastName"></span></h1>
+    <label>First name:</label>
+    <input type="text" data-bind="value:firstName, valueUpdate:'afterkeydown'"/>
+    <label>Last name:</label>
+    <input type="text" data-bind="value:lastName, valueUpdate:'afterkeydown'"/>
+    <button id="btn">Change</button>
+    <script>
+      var myViewModel = {
+        firstName:ko.observable('John'),
+        lastName:ko.observable('Doe')
+      }
+
+      myViewModel.firstName.subscribe(function(newValue){
+        alert('New value: ' + newValue);
+      });
+
+      myViewModel.firstName.subscribe(function(oldValue){
+        alert('Old value: ' + oldValue);
+      }, null, "beforeChange");
+
+      $('#btn').click(function(){
+        myViewModel.firstName('Onur');
+        myViewModel.lastName('Çetintaş');
+      });
+
+      ko.applyBindings(myViewModel);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Click, Event, Value, Checked Bindings</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+      integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+      crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-debug.js"></script>
+  </head>
+  <body>
+    <ul data-bind="foreach:users">
+      <li>
+        <span data-bind="text:$data"></span>
+        <button data-bind="click:$parent.removeUser">Remove</button>
+        </li>
+      </ul>
+      <div data-bind="event:{mouseover:addHover, mouseout:removeHover}">
+        Hover over me
+        </div>
+        <div data-bind="visible:isHover">
+          You are now hovering
+          </div>
+          <p>
+          Username: <input data-bind="value:username, valueUpdate:'afterkeydown'" type="text" />
+            </p>
+            <p>
+            Password: <input data-bind="value:password" type="password" />
+              </p>
+              <p>
+                <input type="checkbox" data-bind="checked:rememberMe" /> Remember me
+                </p>
+              <p>
+                Logging in as <span data-bind="text:username"></span>
+                </p>
+                <button data-bind="click:checkIt">Check it</button>
+    <script>
+      function viewModel(){
+        var self = this;
+        self.username = ko.observable('ocetintas'),
+        self.password = ko.observable('123456'),
+        self.rememberMe = ko.observable(false),
+        self.users = ko.observableArray(['John', 'Lance', 'Dan']);
+        self.removeUser = function(user){self.users.remove(user);}
+        self.isHover = ko.observable(false),
+        self.addHover = function(){
+          this.isHover(true);
+        },
+        self.removeHover = function(){
+          this.isHover(false);
+        },
+        self.checkIt = function(){
+          this.rememberMe(true);
+        }
+      }
+      ko.applyBindings(new viewModel());
+    </script>
+  </body>
+</html>
